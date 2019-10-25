@@ -16,10 +16,10 @@ namespace SuperheroCreator.Controllers
             context = new ApplicationDbContext();
         }
         // SuperHeroes
-        public ActionResult Index(SuperHero superHero)
+        public ActionResult Index()
         {
-            SuperHero newSuperhero = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
-            return View(newSuperhero);
+            var heroes = context.SuperHeroes;
+            return View(heroes);
         }
 
         //SuperHero Details
@@ -42,6 +42,7 @@ namespace SuperheroCreator.Controllers
             try
             {
                 //you need insert logic
+                SuperHero newSuperhero = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
                 context.SuperHeroes.Add(superHero);
                 context.SaveChanges();
 
@@ -60,11 +61,14 @@ namespace SuperheroCreator.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, string name)
+        public ActionResult Edit(int id, SuperHero superHero)
         {
             try
             {
                 //you need update logic
+                SuperHero superHero1 = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
+                context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             catch
@@ -80,11 +84,13 @@ namespace SuperheroCreator.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id, string name)
+        public ActionResult Delete(int id, SuperHero superHero)
         {
             try
             {
                 //add delete logic
+                SuperHero superHero1 = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
