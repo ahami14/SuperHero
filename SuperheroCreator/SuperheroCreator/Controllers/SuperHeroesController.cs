@@ -25,6 +25,7 @@ namespace SuperheroCreator.Controllers
         //SuperHero Details
         public ActionResult Details(int id)
         {
+            var superHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
             return View();
         }
 
@@ -57,7 +58,8 @@ namespace SuperheroCreator.Controllers
         //Allows you to edit people
         public ActionResult Edit(int id)
         {
-            return View();
+            var superHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
+            return View(superHero1);
         }
 
         [HttpPost]
@@ -66,7 +68,13 @@ namespace SuperheroCreator.Controllers
             try
             {
                 //you need update logic
-                SuperHero superHero1 = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
+                var editSuperHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
+                editSuperHero1.superheroName = superHero.superheroName;
+                editSuperHero1.firstName = superHero.firstName;
+                editSuperHero1.lastName = superHero.lastName;
+                editSuperHero1.primaryAbility = superHero.primaryAbility;
+                editSuperHero1.secondaryAbility = superHero.secondaryAbility;
+                editSuperHero1.catchPhrase = superHero.catchPhrase;
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -80,6 +88,7 @@ namespace SuperheroCreator.Controllers
         //Allows you to delete
         public ActionResult Delete(int id)
         {
+            var superHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
             return View();
         }
 
@@ -89,8 +98,15 @@ namespace SuperheroCreator.Controllers
             try
             {
                 //add delete logic
-                SuperHero superHero1 = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
+                var deleteSuperHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
+                deleteSuperHero1.superheroName = superHero.superheroName;
+                deleteSuperHero1.firstName = superHero.firstName;
+                deleteSuperHero1.lastName = superHero.lastName;
+                deleteSuperHero1.primaryAbility = superHero.primaryAbility;
+                deleteSuperHero1.secondaryAbility = superHero.secondaryAbility;
+                deleteSuperHero1.catchPhrase = superHero.catchPhrase;
                 context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             catch
