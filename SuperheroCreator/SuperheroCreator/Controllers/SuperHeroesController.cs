@@ -26,7 +26,7 @@ namespace SuperheroCreator.Controllers
         public ActionResult Details(int id)
         {
             var superHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
-            return View();
+            return View(superHero1);
         }
 
         //SuperHero Create
@@ -75,6 +75,7 @@ namespace SuperheroCreator.Controllers
                 editSuperHero1.primaryAbility = superHero.primaryAbility;
                 editSuperHero1.secondaryAbility = superHero.secondaryAbility;
                 editSuperHero1.catchPhrase = superHero.catchPhrase;
+                
                 context.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -89,7 +90,7 @@ namespace SuperheroCreator.Controllers
         public ActionResult Delete(int id)
         {
             var superHero1 = context.SuperHeroes.Where(s => s.Id == id).FirstOrDefault();
-            return View();
+            return View(superHero1);
         }
 
         [HttpPost]
@@ -106,7 +107,7 @@ namespace SuperheroCreator.Controllers
                 deleteSuperHero1.secondaryAbility = superHero.secondaryAbility;
                 deleteSuperHero1.catchPhrase = superHero.catchPhrase;
                 context.SaveChanges();
-
+           
                 return RedirectToAction("Index");
             }
             catch
