@@ -15,34 +15,76 @@ namespace SuperheroCreator.Controllers
         {
             context = new ApplicationDbContext();
         }
-        // GET: SuperHeroes
-        public ActionResult Index()
+        // SuperHeroes
+        public ActionResult Index(SuperHero superHero)
         {
-            return View();
+            SuperHero newSuperhero = context.SuperHeroes.Where(s => s.Id == superHero.Id).FirstOrDefault();
+            return View(newSuperhero);
         }
 
-        //GET: SuperHero Details
+        //SuperHero Details
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        //GET: SuperHero Create
+        //SuperHero Create
         public ActionResult Create()
         {
             SuperHero superhero = new SuperHero();
             return View();
         }
 
-        //Post
+        //Post (What the viewer will see after methods are called)
         [HttpPost]
         public ActionResult Create(SuperHero superHero)
         {
             try
             {
+                //you need insert logic
                 context.SuperHeroes.Add(superHero);
                 context.SaveChanges();
 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //Allows you to edit people
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, string name)
+        {
+            try
+            {
+                //you need update logic
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //Allows you to delete
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, string name)
+        {
+            try
+            {
+                //add delete logic
                 return RedirectToAction("Index");
             }
             catch
