@@ -106,6 +106,7 @@ namespace SuperheroCreator.Controllers
                 deleteSuperHero1.primaryAbility = superHero.primaryAbility;
                 deleteSuperHero1.secondaryAbility = superHero.secondaryAbility;
                 deleteSuperHero1.catchPhrase = superHero.catchPhrase;
+                context.SuperHeroes.Remove(deleteSuperHero1);
                 context.SaveChanges();
            
                 return RedirectToAction("Index");
